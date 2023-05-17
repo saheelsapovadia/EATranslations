@@ -1,0 +1,16 @@
+.test3 {
+  max-height: 55%;
+  width: 100%;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .test1 {
+    margin-top: 100px;
+  }
+}
+
+@media only screen and (max-device-width: 800px) {
+  .test1 {
+    margin-top: 30px;
+  }
+}

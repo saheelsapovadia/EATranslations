@@ -1,0 +1,94 @@
+.novelCard {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.novelCard {
+  background: #fff;
+  //width: '15rem';
+  margin: '2rem';
+  border-radius: 0.6em;
+  // height: 27em;
+  width: 20%;
+  //max-height: 30%;
+  border: 0;
+  margin: 1em;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 13px 27px -5px rgba(1, 1, 2, 0.25),
+    0 8px 16px -8px hsla(0, 0%, 0%, 0.7), 0 -6px 16px -6px hsla(0, 0%, 0%, 0.03);
+  transition: all ease 200ms;
+  font-weight: bolder;
+}
+
+.novelCard:hover {
+  transform: scale(1.03);
+  box-shadow: 0 13px 40px -5px hsla(240, 30.1%, 28%, 0.12),
+    0 8px 32px -8px hsla(0, 0%, 0%, 0.14),
+    0 -6px 32px -6px hsla(0, 0%, 0%, 0.02);
+}
+
+.novelCard img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.novelCardBody {
+  font-size: 0.97rem;
+  //padding: 100px;
+  // margin-right: 10px;
+  font-weight: bold;
+  width: 100%;
+  object-fit: fill;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .novelCard {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 40%;
+    max-height: 5%;
+
+    border: 0;
+    float: right;
+    font-weight: bold;
+  }
+  .novelCardBody {
+    font-size: 0.7em;
+    margin: 0;
+    border: 0;
+    font-weight: 500;
+    width: 100%;
+    object-fit: fill;
+    justify-content: center;
+    padding: 1em;
+  }
+}
+
+@media only screen and (max-device-width: 320px) {
+  .novelCard {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 38%;
+    max-height: 5%;
+
+    border: 0;
+    float: right;
+    font-weight: bold;
+  }
+  .novelCardBody {
+    font-size: 0.7em;
+    margin: 0;
+    border: 0;
+    font-weight: 500;
+    width: 100%;
+    object-fit: fill;
+    justify-content: center;
+    padding: 1em;
+  }
+}
