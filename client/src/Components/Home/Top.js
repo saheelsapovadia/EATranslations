@@ -1,38 +1,39 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import Novel from './Latest/NovelCard';
-import withRouter from 'react-router-dom/withRouter';
-import { Jumbotron, Container, Row, Col, Card } from 'react-bootstrap';
+import React, { Component } from "react";
+import axios from "axios";
+import Novel from "./Latest/NovelCard";
+import withRouter from "react-router-dom/withRouter";
+import { Jumbotron, Container, Row, Col, Card } from "react-bootstrap";
+import { URL } from "../../utils/URL";
 class Top extends Component {
   state = {
     novelinfo1: {
-      title: '',
+      title: "",
     },
     novelinfo2: {
-      title: '',
+      title: "",
     },
     novelinfo3: {
-      title: '',
+      title: "",
     },
 
     isLoading: true,
   };
   componentDidMount() {
-    axios.get('/api/novels/6072fdb05d6dde0015f712d6').then((response) => {
+    axios.get(`${URL}/api/novels/6072fdb05d6dde0015f712d6`).then((response) => {
       //console.log(response);
       this.setState({ novelinfo1: response.data });
       this.setState({ isLoading: false });
       //console.log(this.state.novelinfo);
     });
 
-    axios.get('/api/novels/6073021c5d6dde0015f712e6').then((response) => {
+    axios.get("/api/novels/6073021c5d6dde0015f712e6").then((response) => {
       //console.log(response);
       this.setState({ novelinfo2: response.data });
       this.setState({ isLoading: false });
       //console.log(this.state.novelinfo);
     });
 
-    axios.get('/api/novels/607300905d6dde0015f712e3').then((response) => {
+    axios.get("/api/novels/607300905d6dde0015f712e3").then((response) => {
       //console.log(response);
       this.setState({ novelinfo3: response.data });
       this.setState({ isLoading: false });
@@ -40,7 +41,7 @@ class Top extends Component {
     });
   }
   novelSelectedHandler = (id) => {
-    this.props.history.push({ pathname: '/novels/' + id });
+    this.props.history.push({ pathname: "/novels/" + id });
   };
   render() {
     return (

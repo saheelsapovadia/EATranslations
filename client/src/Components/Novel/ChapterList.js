@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import Aux from '../../hoc/Auxiliary';
-import ChapterCard from './ChapterCard';
-import axios from 'axios';
-import { Container } from 'react-bootstrap';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import Aux from "../../hoc/Auxiliary";
+import ChapterCard from "./ChapterCard";
+import axios from "axios";
+import { Container } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
+import { URL } from "../../utils/URL";
 class ChapterList extends Component {
   state = {
     chapters: [],
   };
 
   componentDidMount() {
-    axios.get('/api/novels/' + this.props.novelId).then((response) => {
+    axios.get(`${URL}/api/novels/` + this.props.novelId).then((response) => {
       //console.log(response.data.Chapters);
       this.setState({ chapters: response.data.Chapters });
     });
@@ -18,9 +19,9 @@ class ChapterList extends Component {
   }
 
   chapterSelectHandler = (id) => {
-    console.log('chapter no', id);
+    console.log("chapter no", id);
     this.props.history.push({
-      pathname: '/novels/' + this.props.novelId + '/' + id,
+      pathname: "/novels/" + this.props.novelId + "/" + id,
     });
   };
 
@@ -39,8 +40,8 @@ class ChapterList extends Component {
 
     return (
       <Aux>
-        <h4 className='px-4'>Latest Chapter Release-</h4>
-        <Container className='px-4 py-4'>{chaptersl}</Container>
+        <h4 className="px-4">Latest Chapter Release-</h4>
+        <Container className="px-4 py-4">{chaptersl}</Container>
       </Aux>
     );
   }

@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import withRouter from 'react-router-dom/withRouter';
-import Card from 'react-bootstrap/Card';
-import Row from 'react-bootstrap/Row';
-import Novel from './Latest/NovelCard';
-import './Carousel.scss';
-import LoadingNovelCard from '../Loading/LoadingNovelCard';
-import { CardDeck } from 'react-bootstrap';
+import React, { Component } from "react";
+import axios from "axios";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import withRouter from "react-router-dom/withRouter";
+import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Novel from "./Latest/NovelCard";
+import "./Carousel.scss";
+import LoadingNovelCard from "../Loading/LoadingNovelCard";
+import { CardDeck } from "react-bootstrap";
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
     <div
       className={className}
-      style={{ ...style, display: 'block', background: '#e1e7f0' }}
+      style={{ ...style, display: "block", background: "#e1e7f0" }}
       onClick={onClick}
     />
   );
@@ -26,7 +26,7 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: 'block', background: '#e1e7f0' }}
+      style={{ ...style, display: "block", background: "#e1e7f0" }}
       onClick={onClick}
     />
   );
@@ -34,19 +34,19 @@ function SamplePrevArrow(props) {
 
 class CarouselMain extends Component {
   state = {
-    novels: ['', '', '', '', '', ''],
+    novels: ["", "", "", "", "", ""],
     isLoading: true,
   };
 
   componentDidMount() {
-    axios.get('/api/novels/').then((response) => {
+    axios.get(`${URL}/api/novels/`).then((response) => {
       this.setState({ novels: response.data });
       this.setState({ isLoading: false });
     });
   }
 
   novelSelectedHandler = (id) => {
-    this.props.history.push({ pathname: '/novels/' + id });
+    this.props.history.push({ pathname: "/novels/" + id });
   };
   render() {
     const settings = {

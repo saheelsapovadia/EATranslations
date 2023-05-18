@@ -1,25 +1,26 @@
-import React, { Component } from 'react';
-import Novel from './NovelCard';
-import Aux from '../../../hoc/Auxiliary';
-import { Container, Row } from 'react-bootstrap/';
-import axios from 'axios';
-import withRouter from 'react-router-dom/withRouter';
-import LoadingNovelCard from '../../Loading/LoadingNovelCard';
+import React, { Component } from "react";
+import Novel from "./NovelCard";
+import Aux from "../../../hoc/Auxiliary";
+import { Container, Row } from "react-bootstrap/";
+import axios from "axios";
+import withRouter from "react-router-dom/withRouter";
+import LoadingNovelCard from "../../Loading/LoadingNovelCard";
+import { URL } from "../../../utils/URL";
 class Latest extends Component {
   state = {
-    novels: ['', '', '', '', '', ''],
+    novels: ["", "", "", "", "", ""],
     isLoading: true,
   };
 
   componentDidMount() {
-    axios.get('/api/novels/').then((response) => {
+    axios.get(`${URL}/api/novels/`).then((response) => {
       this.setState({ novels: response.data });
       this.setState({ isLoading: false });
     });
   }
 
   novelSelectedHandler = (id) => {
-    this.props.history.push({ pathname: '/novels/' + id });
+    this.props.history.push({ pathname: "/novels/" + id });
   };
   render() {
     var novels;
@@ -41,7 +42,7 @@ class Latest extends Component {
     }
     return (
       <Aux>
-        <h6 className='mx-auto' style={{ alignContent: 'center' }}>
+        <h6 className="mx-auto" style={{ alignContent: "center" }}>
           LATEST
         </h6>
 

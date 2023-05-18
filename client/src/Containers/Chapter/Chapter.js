@@ -13,6 +13,7 @@ import SupportUs from "../../Components/Home/supportus";
 //import * as actionTypes from '../../store/actions/actionTypes';
 import "./Chapter.css";
 import { BlockDisqusAds } from "../../utils/BlockDisqusAds";
+import { URL } from "../../utils/URL";
 
 class ChapterPage extends Component {
   state = {
@@ -44,7 +45,7 @@ class ChapterPage extends Component {
     // );
     axios
       .get(
-        "/api/novels/" +
+        `${URL}/api/novels/` +
           this.props.match.params.id +
           "/" +
           this.props.match.params.chapterId
@@ -72,7 +73,10 @@ class ChapterPage extends Component {
     console.log("state:", this.state.chapterId);
     await axios
       .get(
-        "/api/novels/" + this.props.match.params.id + "/" + this.state.chapterId
+        `${URL}/api/novels/` +
+          this.props.match.params.id +
+          "/" +
+          this.state.chapterId
       )
       .then((response) => {
         //console.log(response.data);
@@ -100,7 +104,10 @@ class ChapterPage extends Component {
     }
     axios
       .get(
-        "/api/novels/" + this.props.match.params.id + "/" + this.state.chapterId
+        `${URL}/api/novels/` +
+          this.props.match.params.id +
+          "/" +
+          this.state.chapterId
       )
       .then((response) => {
         if (response.data) {

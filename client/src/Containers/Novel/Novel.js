@@ -12,6 +12,7 @@ import LoadingNovelPage from "./Loading/LoadingNovelPage";
 import Disqus from "disqus-react";
 import TitleComponent from "../../utils/TitleComponent";
 import { BlockDisqusAds } from "../../utils/BlockDisqusAds";
+import { URL } from "../../utils/URL";
 class Novel extends Component {
   state = {
     novelinfo: {
@@ -24,16 +25,18 @@ class Novel extends Component {
   async componentDidMount() {
     BlockDisqusAds();
     console.log("Component Mount");
-    axios.get("/api/novels/" + this.props.match.params.id).then((response) => {
-      //console.log(response);
-      this.setState({ novelinfo: response.data });
-      this.setState({ isLoading: false });
-      //console.log(this.state.novelinfo);
-    });
+    axios
+      .get(`${URL}/api/novels/` + this.props.match.params.id)
+      .then((response) => {
+        //console.log(response);
+        this.setState({ novelinfo: response.data });
+        this.setState({ isLoading: false });
+        //console.log(this.state.novelinfo);
+      });
     //checking bookmark status
     axios
       .get(
-        "/api/users/" +
+        `${URL}/api/users/` +
           this.props.userId +
           "/" +
           this.props.match.params.id +
@@ -60,7 +63,7 @@ class Novel extends Component {
       //checking bookmark status
       axios
         .get(
-          "/api/users/" +
+          `${URL}/api/users/` +
             this.props.userId +
             "/" +
             this.props.match.params.id +
