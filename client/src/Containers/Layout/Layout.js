@@ -1,44 +1,46 @@
-import React, { Component } from 'react';
-import Aux from '../../hoc/Auxiliary';
-import { Route, Switch, withRouter } from 'react-router-dom';
-import Navbar from './Navbar/Navbar';
-import Home from '../Home/Home';
-import Novel from '../Novel/Novel';
-import Chapter from '../Chapter/Chapter';
-import Profile from '../Profile/Profile';
-import Auth from '../Auth/Auth';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import Aux from "../../hoc/Auxiliary";
+import { Route, Switch, withRouter } from "react-router-dom";
+import Navbar from "./Navbar/Navbar";
+import Home from "../Home/Home";
+import Novel from "../Novel/Novel";
+import Chapter from "../Chapter/Chapter";
+import Profile from "../Profile/Profile";
+import Auth from "../Auth/Auth";
+import { connect } from "react-redux";
 //import ProtectedRoute from '../../utils/ProtectedRoute';
-import * as actions from '../../Store/actions/index';
-import AddNovel from '../Admin/AddNovel';
-import AllNovels from '../Admin/AllNovels';
-import NovelPage from '../Admin/Novel/NovelPage';
-import ChapterPage from '../Admin/ChapterPage';
-import AddChapter from '../Admin/AddChapter';
-import Footer from '../../Components/Footer/Footer';
-import ScrollToTop from '../../utils/ScrollToTop';
-import NotFound from '../NotFound/NotFound';
-import Aboutus from '../AboutUs/Aboutus';
-import ContactUs from '../ContactUs/ContactUs';
-import CommentPolicy from '../DisqusComment/CommentPolicy';
-import EditNovel from '../Admin/EditNovel';
-import EditChapter from '../Admin/EditChapter';
+import * as actions from "../../Store/actions/index";
+import AddNovel from "../Admin/AddNovel";
+import AllNovels from "../Admin/AllNovels";
+import NovelPage from "../Admin/Novel/NovelPage";
+import ChapterPage from "../Admin/ChapterPage";
+import AddChapter from "../Admin/AddChapter";
+import Footer from "../../Components/Footer/Footer";
+import ScrollToTop from "../../utils/ScrollToTop";
+import NotFound from "../NotFound/NotFound";
+import Aboutus from "../AboutUs/Aboutus";
+import ContactUs from "../ContactUs/ContactUs";
+import CommentPolicy from "../DisqusComment/CommentPolicy";
+import EditNovel from "../Admin/EditNovel";
+import EditChapter from "../Admin/EditChapter";
 
-import ReactGA from 'react-ga';
-import { createBrowserHistory } from 'history';
-import Library from '../Library/Library';
+import ReactGA from "react-ga";
+import { createBrowserHistory } from "history";
+import Library from "../Library/Library";
+import { BlockDisqusAds } from "../../utils/BlockDisqusAds";
 
 export const history = createBrowserHistory();
 history.listen((location) => {
-  console.log('location pathname: ', location.pathname);
+  console.log("location pathname: ", location.pathname);
   ReactGA.pageview(location.pathname + location.search);
 });
 
 class Layout extends Component {
   componentDidMount() {
-    if (localStorage.getItem('userToken') !== null) {
-      console.log('auto logging...', localStorage.getItem('userToken'));
-      this.props.userLogin(localStorage.getItem('userToken'));
+    BlockDisqusAds();
+    if (localStorage.getItem("userToken") !== null) {
+      console.log("auto logging...", localStorage.getItem("userToken"));
+      this.props.userLogin(localStorage.getItem("userToken"));
     }
   }
   componentDidUpdate(prevProps) {
@@ -48,13 +50,13 @@ class Layout extends Component {
   }
 
   onRouteChanged(location) {
-    console.log('ROUTE CHANGED');
-    console.log('location pathname: ', location.pathname);
+    console.log("ROUTE CHANGED");
+    console.log("location pathname: ", location.pathname);
     ReactGA.pageview(location.pathname + location.search);
   }
 
   render() {
-    console.log('Layout Component');
+    console.log("Layout Component");
     // if (localStorage.getItem('userToken') !== null) {
     //   this.props.userLogin(localStorage.getItem('userToken'));
     // }

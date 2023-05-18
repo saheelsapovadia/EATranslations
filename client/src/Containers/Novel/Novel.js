@@ -1,28 +1,30 @@
-import React, { Component } from 'react';
-import Aux from '../../hoc/Auxiliary';
-import NovelInfo from '../../Components/Novel/NovelInfo';
-import axios from 'axios';
-import Summary from '../../Components/Novel/Summary';
-import { connect } from 'react-redux';
-import ChapterList from '../../Components/Novel/ChapterList';
-import Container from 'react-bootstrap/Container';
-import SupportUs from '../../Components/Home/supportus';
-import * as actions from '../../Store/actions/index';
-import LoadingNovelPage from './Loading/LoadingNovelPage';
-import Disqus from 'disqus-react';
-import TitleComponent from '../../utils/TitleComponent';
+import React, { Component } from "react";
+import Aux from "../../hoc/Auxiliary";
+import NovelInfo from "../../Components/Novel/NovelInfo";
+import axios from "axios";
+import Summary from "../../Components/Novel/Summary";
+import { connect } from "react-redux";
+import ChapterList from "../../Components/Novel/ChapterList";
+import Container from "react-bootstrap/Container";
+import SupportUs from "../../Components/Home/supportus";
+import * as actions from "../../Store/actions/index";
+import LoadingNovelPage from "./Loading/LoadingNovelPage";
+import Disqus from "disqus-react";
+import TitleComponent from "../../utils/TitleComponent";
+import { BlockDisqusAds } from "../../utils/BlockDisqusAds";
 class Novel extends Component {
   state = {
     novelinfo: {
-      title: '',
+      title: "",
     },
     bookmark: false,
     isLoading: true,
   };
 
   async componentDidMount() {
-    console.log('Component Mount');
-    axios.get('/api/novels/' + this.props.match.params.id).then((response) => {
+    BlockDisqusAds();
+    console.log("Component Mount");
+    axios.get("/api/novels/" + this.props.match.params.id).then((response) => {
       //console.log(response);
       this.setState({ novelinfo: response.data });
       this.setState({ isLoading: false });
@@ -31,11 +33,11 @@ class Novel extends Component {
     //checking bookmark status
     axios
       .get(
-        '/api/users/' +
+        "/api/users/" +
           this.props.userId +
-          '/' +
+          "/" +
           this.props.match.params.id +
-          '/check'
+          "/check"
       )
       .then((response) => {
         console.log(response);
@@ -50,19 +52,19 @@ class Novel extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('Component Update');
-    console.log('prev prop', prevProps.userId);
-    console.log('user prop', this.props.userId);
+    console.log("Component Update");
+    console.log("prev prop", prevProps.userId);
+    console.log("user prop", this.props.userId);
     if (prevProps?.userId !== this.props.userId) {
-      console.log('setting..');
+      console.log("setting..");
       //checking bookmark status
       axios
         .get(
-          '/api/users/' +
+          "/api/users/" +
             this.props.userId +
-            '/' +
+            "/" +
             this.props.match.params.id +
-            '/check'
+            "/check"
         )
         .then((response) => {
           console.log(response);
@@ -76,24 +78,24 @@ class Novel extends Component {
   }
 
   checkBookmark = (id) => {
-    console.log('checking...');
+    console.log("checking...");
     var result;
     if (this.props.userBookmarks) {
       result = this.props.userBookmarks.find((id) => {
         return id === this.props.match.params.id;
       });
     }
-    console.log('result: ', result);
+    console.log("result: ", result);
     return result ? true : false;
   };
 
   toggleBookMark = () => {
     this.setState({ bookmark: !this.state.bookmark }, () => {
       if (this.state.bookmark) {
-        console.log('adding...');
+        console.log("adding...");
         this.props.addBookmark(this.props.userId, this.props.match.params.id);
       } else {
-        console.log('removing...');
+        console.log("removing...");
         this.props.removeBookmark(
           this.props.userId,
           this.props.match.params.id
@@ -103,12 +105,12 @@ class Novel extends Component {
   };
 
   render() {
-    console.log('Novel Component');
+    console.log("Novel Component");
     //console.log(this.state);
-    const disqusShortname = 'eatranslations'; //found in your Disqus.com dashboard
+    const disqusShortname = "eatranslations"; //found in your Disqus.com dashboard
     const disqusConfig = {
       url:
-        'https://lit-temple-67513.herokuapp.com/novels/' +
+        "https://lit-temple-67513.herokuapp.com/novels/" +
         this.props.match.params.id, //this.props.pageUrl
       identifier: this.props.match.params.id, //this.props.uniqueId
       title: this.state.novelinfo?.title, //this.props.title

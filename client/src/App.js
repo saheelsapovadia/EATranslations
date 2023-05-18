@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
-import Layout from './Containers/Layout/Layout';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import userReducer from './Store/reducers/userReducer';
-import thunk from 'redux-thunk';
-import ReactGA from 'react-ga';
-import { createBrowserHistory } from 'history';
+import React, { Component } from "react";
+import Layout from "./Containers/Layout/Layout";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import userReducer from "./Store/reducers/userReducer";
+import thunk from "redux-thunk";
+import ReactGA from "react-ga";
+import { createBrowserHistory } from "history";
+import { BlockDisqusAds } from "./utils/BlockDisqusAds";
 // import { createBrowserHistory } from 'history';
 
 // const trackingId = 'G-FXG6P09SHJ'; // Replace with your Google Analytics tracking ID
@@ -26,17 +27,25 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
+BlockDisqusAds();
+
+// setTimeout(() => {
+//   var dDiv = document.getElementById("disqus_thread");
+//   var iframe = dDiv.getElementsByTagName("iframe")[0];
+//   dDiv.removeChild(dDiv.getElementsByTagName("iframe")[0]);
+// }, 3000);
+
 export const history = createBrowserHistory();
 history.listen((location) => {
-  console.log('location pathname: ', location.pathname);
+  console.log("location pathname: ", location.pathname);
   ReactGA.pageview(location.pathname + location.search);
 });
 class App extends Component {
   componentDidMount() {
-    ReactGA.initialize('UA-194302215-1');
+    ReactGA.initialize("UA-194302215-1");
   }
   render() {
-    console.log('App Component');
+    console.log("App Component");
     return (
       <Provider store={store}>
         <BrowserRouter history={history}>

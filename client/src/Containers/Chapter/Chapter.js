@@ -1,34 +1,36 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import Aux from '../../hoc/Auxiliary';
-import axios from 'axios';
-import ToolBar from '../../Components/Chapter/ToolBar';
-import Button from 'react-bootstrap/Button';
-import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import NotFound from '../NotFound/NotFound';
-import Disqus from 'disqus-react';
-import SupportUs from '../../Components/Home/supportus';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import Aux from "../../hoc/Auxiliary";
+import axios from "axios";
+import ToolBar from "../../Components/Chapter/ToolBar";
+import Button from "react-bootstrap/Button";
+import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import NotFound from "../NotFound/NotFound";
+import Disqus from "disqus-react";
+import SupportUs from "../../Components/Home/supportus";
 //import * as actionTypes from '../../store/actions/actionTypes';
-import './Chapter.css';
+import "./Chapter.css";
+import { BlockDisqusAds } from "../../utils/BlockDisqusAds";
 
 class ChapterPage extends Component {
   state = {
     chapter: {
-      nextChapter: '',
-      prevChapter: '',
+      nextChapter: "",
+      prevChapter: "",
     },
-    chapterId: '',
+    chapterId: "",
     wrongChapter: false,
     fontSize: 1,
   };
   novelSelectedHandler = (id) => {
-    this.props.history.push({ pathname: '/novels/' + id });
+    this.props.history.push({ pathname: "/novels/" + id });
   };
   componentDidMount() {
     //stop right-click
-    document.addEventListener('contextmenu', (e) => {
+    BlockDisqusAds();
+    document.addEventListener("contextmenu", (e) => {
       e.preventDefault();
     });
 
@@ -42,9 +44,9 @@ class ChapterPage extends Component {
     // );
     axios
       .get(
-        '/api/novels/' +
+        "/api/novels/" +
           this.props.match.params.id +
-          '/' +
+          "/" +
           this.props.match.params.chapterId
       )
       .then((response) => {
@@ -64,13 +66,13 @@ class ChapterPage extends Component {
     if (this.state.chapter.nextChapter)
       await this.setState({ chapterId: this.state.chapter.nextChapter });
     else {
-      alert('no next chapter');
+      alert("no next chapter");
       return;
     }
-    console.log('state:', this.state.chapterId);
+    console.log("state:", this.state.chapterId);
     await axios
       .get(
-        '/api/novels/' + this.props.match.params.id + '/' + this.state.chapterId
+        "/api/novels/" + this.props.match.params.id + "/" + this.state.chapterId
       )
       .then((response) => {
         //console.log(response.data);
@@ -78,13 +80,13 @@ class ChapterPage extends Component {
           this.setState({ chapter: response.data });
           this.props.history.push({
             pathname:
-              '/novels/' +
+              "/novels/" +
               this.props.match.params.id +
-              '/' +
+              "/" +
               this.state.chapterId,
           });
         } else {
-          alert('next chapter not available!');
+          alert("next chapter not available!");
         }
       });
   };
@@ -93,12 +95,12 @@ class ChapterPage extends Component {
     if (this.state.chapter.prevChapter)
       await this.setState({ chapterId: this.state.chapter.prevChapter });
     else {
-      alert('no previous chapter');
+      alert("no previous chapter");
       return;
     }
     axios
       .get(
-        '/api/novels/' + this.props.match.params.id + '/' + this.state.chapterId
+        "/api/novels/" + this.props.match.params.id + "/" + this.state.chapterId
       )
       .then((response) => {
         if (response.data) {
@@ -107,13 +109,13 @@ class ChapterPage extends Component {
           this.setState({ chapter: response.data });
           this.props.history.push({
             pathname:
-              '/novels/' +
+              "/novels/" +
               this.props.match.params.id +
-              '/' +
+              "/" +
               this.state.chapterId,
           });
         } else {
-          alert('No prev chapter!');
+          alert("No prev chapter!");
         }
       });
   };
@@ -132,12 +134,12 @@ class ChapterPage extends Component {
   };
   render() {
     //console.log('chapter no', this.state.chapterNo);
-    const disqusShortname = 'eatranslations'; //found in your Disqus.com dashboard
+    const disqusShortname = "eatranslations"; //found in your Disqus.com dashboard
     const disqusConfig = {
       url:
-        'https://lit-temple-67513.herokuapp.com/novels/' +
+        "https://lit-temple-67513.herokuapp.com/novels/" +
         this.props.match.params.id +
-        '/' +
+        "/" +
         this.state.chapterNo,
       identifier: this.props.match.params.id + this.state.chapterNo, //this.props.uniqueId
       title: this.state.novelinfo?.title, //this.props.title
@@ -149,15 +151,15 @@ class ChapterPage extends Component {
       return (
         <div className="noselect">
           <Aux>
-            <Container style={{ fontSize: fontSize + 'em' }}>
+            <Container style={{ fontSize: fontSize + "em" }}>
               <Button
                 className="mr-2"
                 style={{
-                  outline: 'none',
-                  boxShadow: 'none',
-                  border: '0',
-                  padding: '5px 10px',
-                  marginBottom: '0.8em',
+                  outline: "none",
+                  boxShadow: "none",
+                  border: "0",
+                  padding: "5px 10px",
+                  marginBottom: "0.8em",
                 }}
                 variant="dark"
                 onClick={() =>
